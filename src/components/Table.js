@@ -1,11 +1,12 @@
-import { useState } from 'react';
 import useFetch from '../hooks/useFetch';
+import useFilters from '../hooks/useFilters';
 import usePlanetList from '../hooks/usePlanetList';
 
 export default function Table() {
-  const [nameFilter, setNameFilter] = useState('');
-  const planetList = usePlanetList(nameFilter);
+  // const [nameFilter, setNameFilter] = useState('');
+  const nameFilter = useFilters('');
   const { loading } = useFetch();
+  const planetList = usePlanetList(nameFilter.value);
 
   return (
     <div className="table-container">
@@ -14,8 +15,8 @@ export default function Table() {
         data-testid="name-filter"
         type="text"
         placeholder="Planet Name"
-        value={ nameFilter }
-        onChange={ (e) => setNameFilter(e.target.value) }
+        value={ nameFilter.value }
+        onChange={ nameFilter.handleChange }
       />
       <table>
         <thead>
