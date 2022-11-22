@@ -1,13 +1,45 @@
-import { useState } from 'react';
+// import { useEffect } from 'react';
 
-function useFilters(initialValue) {
-  const [value, setValue] = useState(initialValue);
+import { useContext } from 'react';
+import PlanetsContext from '../context/PlanetsContext';
 
-  function handleChange(e) {
-    setValue(e.target.value);
+const MAIOR = 'maior que';
+const MENOR = 'menor que';
+const IGUAL = 'igual a';
+
+export default function useFilters(
+  compFilter,
+  columnFilter,
+  valueFilter,
+  planetList,
+) {
+  const { setPlanets } = useContext(PlanetsContext);
+
+  function numericFilter() {
+    switch (compFilter) {
+    case MAIOR: {
+      const filteredPlanets = planetList.filter((p) => p[columnFilter] > valueFilter);
+      setPlanets(filteredPlanets);
+      break;
+    }
+
+    case MENOR: {
+      const filteredPlanets = planetList.filter((p) => p[columnFilter] < valueFilter);
+      console.log(filteredPlanets);
+      setPlanets(filteredPlanets);
+      break;
+    }
+
+    case IGUAL: {
+      const filteredPlanets = planetList.filter((p) => p[columnFilter] === valueFilter);
+      setPlanets(filteredPlanets);
+      break;
+    }
+
+    default:
+      break;
+    }
   }
 
-  return { value, handleChange };
+  return numericFilter;
 }
-
-export default useFilters;

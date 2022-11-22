@@ -21,7 +21,7 @@ function useFetch() {
     getPlanets();
   }, []);
 
-  return { loading, planets, error };
+  return { loading, planets, setPlanets, error };
 }
 
 export default useFetch;

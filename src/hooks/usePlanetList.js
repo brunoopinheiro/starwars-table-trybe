@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
-import useFetch from './useFetch';
+import { useState, useEffect, useContext } from 'react';
+import PlanetsContext from '../context/PlanetsContext';
 
 function usePlanetList(planetName) {
-  const { planets } = useFetch();
+  const { planets } = useContext(PlanetsContext);
   const [planetList, setPlanetList] = useState(planets);
 
   useEffect(() => {
