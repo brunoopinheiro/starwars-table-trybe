@@ -1,11 +1,22 @@
+import { useState } from 'react';
 import useFetch from '../hooks/useFetch';
+import usePlanetList from '../hooks/usePlanetList';
 
 export default function Table() {
-  const { planets, loading } = useFetch();
+  const [nameFilter, setNameFilter] = useState('');
+  const planetList = usePlanetList(nameFilter);
+  const { loading } = useFetch();
 
   return (
     <div className="table-container">
       { loading && <p>Loading data from a galaxy far far away...</p> }
+      <input
+        data-testid="name-filter"
+        type="text"
+        placeholder="Planet Name"
+        value={ nameFilter }
+        onChange={ (e) => setNameFilter(e.target.value) }
+      />
       <table>
         <thead>
           <tr>
@@ -26,7 +37,7 @@ export default function Table() {
         </thead>
         <tbody>
           {
-            planets.map((p, index) => (
+            planetList.map((p, index) => (
               <tr key={ `${index}_${p.name}` }>
                 <th>{p.name}</th>
                 <th>{p.rotation_period}</th>
