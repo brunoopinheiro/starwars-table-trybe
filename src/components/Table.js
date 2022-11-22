@@ -37,7 +37,13 @@ export default function Table() {
                 <th>{p.terrain}</th>
                 <th>{p.surface_water}</th>
                 <th>{p.population}</th>
-                <th>films array</th>
+                <th>
+                  <ul>
+                    {
+                      p.films.map((film) => <li key={ film }>{film}</li>)
+                    }
+                  </ul>
+                </th>
                 <th>{p.created}</th>
                 <th>{p.edited}</th>
                 <th>{p.url}</th>
@@ -46,7 +52,6 @@ export default function Table() {
           }
         </tbody>
       </table>
-      <p>{ JSON.stringify(planets) }</p>
     </div>
   );
 }
