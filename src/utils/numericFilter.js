@@ -10,14 +10,18 @@ export default function numericFilter(
   },
   planetList,
 ) {
+  console.log(planetList);
+  console.log(columnFilter);
   switch (compFilter) {
   case MAIOR: {
-    const filteredPlanets = planetList.filter((p) => p[columnFilter] > valueFilter);
+    const filteredPlanets = planetList
+      .filter((p) => Number(p[columnFilter]) > valueFilter);
     return filteredPlanets;
   }
 
   case MENOR: {
-    const filteredPlanets = planetList.filter((p) => p[columnFilter] < valueFilter);
+    const filteredPlanets = planetList
+      .filter((p) => Number(p[columnFilter]) < valueFilter);
     return filteredPlanets;
   }
 
