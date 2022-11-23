@@ -38,12 +38,24 @@ export default function Table() {
       compFilter: compFilter.value,
       columnFilter: columnFilter.value,
       valueFilter: valueFilter.value,
-      id: numFilters.length,
+      id: columnFilter.value,
     };
     const remainingOptions = columnFilters
       .filter((cf) => cf !== newNumFilter.columnFilter);
     setNumFilters([...numFilters, newNumFilter]);
     setColumnFilters(remainingOptions);
+  };
+
+  const removeNumFilter = (id) => {
+    const remainingFilters = numFilters.filter((nf) => nf.id !== id);
+
+    setNumFilters(remainingFilters);
+    setColumnFilters([...columnFilters, id]);
+  };
+
+  const resetFilters = () => {
+    setNumFilters([]);
+    setColumnFilters(columnFiltersArray);
   };
 
   return (
@@ -93,13 +105,20 @@ export default function Table() {
         >
           Filter
         </button>
+        <button
+          type="button"
+          data-testid="button-remove-filters"
+          onClick={ () => resetFilters() }
+        >
+          Remove All Filters
+        </button>
       </div>
       <div className="active-filters">
         {
           numFilters.map((nf) => (
-            <span key={ nf.id }>
+            <span key={ nf.id } data-testid="filter">
               {`${nf.columnFilter} ${nf.compFilter} ${nf.valueFilter}`}
-              <button type="button" onClick={ () => console.log(nf.id) }>X</button>
+              <button type="button" onClick={ () => removeNumFilter(nf.id) }>X</button>
             </span>
           ))
         }

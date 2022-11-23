@@ -10,8 +10,6 @@ export default function numericFilter(
   },
   planetList,
 ) {
-  console.log(planetList);
-  console.log(columnFilter);
   switch (compFilter) {
   case MAIOR: {
     const filteredPlanets = planetList
