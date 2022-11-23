@@ -179,7 +179,13 @@ export default function Table() {
           numFilters.map((nf) => (
             <span key={ nf.id } data-testid="filter">
               {`${nf.columnFilter} ${nf.compFilter} ${nf.valueFilter}`}
-              <button type="button" onClick={ () => removeNumFilter(nf.id) }>X</button>
+              <button
+                type="button"
+                onClick={ () => removeNumFilter(nf.id) }
+                data-testid="remove-filter-button"
+              >
+                X
+              </button>
             </span>
           ))
         }
