@@ -12,17 +12,26 @@ import usePlanetList from '../hooks/usePlanetList';
 //   id: numFilters.length,
 // };
 
+const columnFiltersArray = [
+  'population',
+  'orbital_period',
+  'diameter',
+  'rotation_period',
+  'surface_water',
+];
+
 export default function Table() {
+  const { loading } = useContext(PlanetsContext);
+
+  const [numFilters, setNumFilters] = useState([]);
+  const [columnFilters, setColumnFilters] = useState(columnFiltersArray);
+
   const nameFilter = useFields('');
-  const columnFilter = useFields('population');
+  const columnFilter = useFields(columnFiltersArray[0]);
   const compFilter = useFields('maior que');
   const valueFilter = useFields(0);
 
-  const { loading } = useContext(PlanetsContext);
-
   const planetList = usePlanetList(nameFilter.value);
-
-  const [numFilters, setNumFilters] = useState([]);
 
   const createNumFilter = () => {
     const newNumFilter = {
@@ -31,7 +40,10 @@ export default function Table() {
       valueFilter: valueFilter.value,
       id: numFilters.length,
     };
+    const remainingOptions = columnFilters
+      .filter((cf) => cf !== newNumFilter.columnFilter);
     setNumFilters([...numFilters, newNumFilter]);
+    setColumnFilters(remainingOptions);
   };
 
   return (
@@ -50,12 +62,13 @@ export default function Table() {
           name="column-filter"
           value={ columnFilter.value }
           onChange={ columnFilter.handleChange }
+          onClick={ columnFilter.handleChange }
         >
-          <option>population</option>
-          <option>orbital_period</option>
-          <option>diameter</option>
-          <option>rotation_period</option>
-          <option>surface_water</option>
+          {
+            columnFilters.map((cf) => (
+              <option key={ cf }>{cf}</option>
+            ))
+          }
         </select>
         <select
           data-testid="comparison-filter"
