@@ -25,6 +25,7 @@ export default function Table() {
 
   const [numFilters, setNumFilters] = useState([]);
   const [columnFilters, setColumnFilters] = useState(columnFiltersArray);
+  const [order, setOrder] = useState({ column: 'population', sort: 'ASC' });
 
   const nameFilter = useFields('');
   const columnFilter = useFields(columnFiltersArray[0]);
@@ -56,6 +57,22 @@ export default function Table() {
   const resetFilters = () => {
     setNumFilters([]);
     setColumnFilters(columnFiltersArray);
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setOrder({ ...order, [name]: value });
+  };
+
+  const sortFunction = (a, b) => {
+    const AUX = -1;
+    const refColumn = order.column;
+    if (a[refColumn] === 'unknown') return 1;
+    if (b[refColumn] === 'unknown') return AUX;
+    if (order.sort === 'ASC') {
+      return a[refColumn] - b[refColumn];
+    }
+    return b[refColumn] - a[refColumn];
   };
 
   return (
@@ -105,6 +122,50 @@ export default function Table() {
         >
           Filter
         </button>
+        <fieldset>
+          <legend>Sort Results</legend>
+          <select
+            data-testid="column-sort"
+            name="column"
+            value={ order.column }
+            onChange={ handleChange }
+          >
+            {
+              columnFiltersArray.map((cf) => (
+                <option key={ cf } value={ cf }>{cf}</option>
+              ))
+            }
+          </select>
+          <label htmlFor="asc">
+            Ascending
+            <input
+              data-testid="column-sort-input-asc"
+              id="asc"
+              value="ASC"
+              type="radio"
+              name="sort"
+              checked={ order.sort === 'ASC' }
+              onChange={ handleChange }
+            />
+          </label>
+          <label htmlFor="desc">
+            Descending
+            <input
+              data-testid="column-sort-input-desc"
+              id="desc"
+              value="DESC"
+              type="radio"
+              name="sort"
+              onChange={ handleChange }
+            />
+          </label>
+          <button
+            type="button"
+            data-testid="column-sort-button"
+          >
+            Sort
+          </button>
+        </fieldset>
         <button
           type="button"
           data-testid="button-remove-filters"
@@ -146,29 +207,31 @@ export default function Table() {
             numFilters.reduce((acc, currNF) => {
               const filtered = numericFilter(currNF, acc);
               return filtered;
-            }, planetList).map((p, index) => (
-              <tr key={ `${index}_${p.name}` }>
-                <th>{p.name}</th>
-                <th>{p.rotation_period}</th>
-                <th>{p.orbital_period}</th>
-                <th>{p.diameter}</th>
-                <th>{p.climate}</th>
-                <th>{p.gravity}</th>
-                <th>{p.terrain}</th>
-                <th>{p.surface_water}</th>
-                <th>{p.population}</th>
-                <th>
-                  <ul>
-                    {
-                      p.films.map((film) => <li key={ film }>{film}</li>)
-                    }
-                  </ul>
-                </th>
-                <th>{p.created}</th>
-                <th>{p.edited}</th>
-                <th>{p.url}</th>
-              </tr>
-            ))
+            }, planetList)
+              .sort((a, b) => sortFunction(a, b))
+              .map((p, index) => (
+                <tr key={ `${index}_${p.name}` }>
+                  <th data-testid="planet-name">{p.name}</th>
+                  <th>{p.rotation_period}</th>
+                  <th>{p.orbital_period}</th>
+                  <th>{p.diameter}</th>
+                  <th>{p.climate}</th>
+                  <th>{p.gravity}</th>
+                  <th>{p.terrain}</th>
+                  <th>{p.surface_water}</th>
+                  <th>{p.population}</th>
+                  <th>
+                    <ul>
+                      {
+                        p.films.map((film) => <li key={ film }>{film}</li>)
+                      }
+                    </ul>
+                  </th>
+                  <th>{p.created}</th>
+                  <th>{p.edited}</th>
+                  <th>{p.url}</th>
+                </tr>
+              ))
           }
         </tbody>
       </table>
