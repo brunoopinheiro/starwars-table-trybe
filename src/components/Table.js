@@ -173,7 +173,7 @@ export default function Table() {
       <div className="active-filters">
         {
           numFilters.map((nf) => (
-            <span key={ nf.id } data-testid="filter">
+            <span key={ nf.id } data-testid="filter" className="filter">
               {`${nf.columnFilter} ${nf.compFilter} ${nf.valueFilter}`}
               <button
                 type="button"

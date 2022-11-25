@@ -77,14 +77,10 @@
   height: 42px;
 }
 
-.filters-buttons option {
-  background-color: transparent;
+.filters-buttons select option {
+  background: black;
   color: white;
   font-weight: 700;
-}
-
-.filters-buttons select:active {
-  background-color: transparent;
 }
 
 .filters-buttons label {
@@ -151,4 +147,32 @@
 .sort-filter input:checked {
   background-color: var(--yellow-bright);
   transform: scale(1);
+}
+
+.active-filters {
+  align-items: center;
+  display: inline-flex;
+  height: 50px;
+  justify-content: center;
+  width: 100%;
+}
+
+.active-filters .filter {
+  border-right: 1px solid var(--yellow-bright);
+  font-weight: 700;
+  margin-left: 10px;
+  padding: 5px;
+}
+
+.active-filters .filter:last-of-type {
+  border-right: none;
+}
+
+.active-filters .filter button {
+  background: none;
+  border: 1px solid var(--yellow-bright);
+  border-radius: 5px;
+  color: var(--yellow-bright);
+  cursor: pointer;
+  margin: 0 10px;
 }
