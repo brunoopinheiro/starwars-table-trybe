@@ -38,7 +38,7 @@ describe('Tests the display of components in the application', () => {
     expect(screen.getByTestId(colSortTestId)).toBeInTheDocument();
     expect(screen.getByTestId(colSortAscTestId)).toBeInTheDocument();
     expect(screen.getByTestId(colSortDescTestId)).toBeInTheDocument();
-    expect(screen.getByTestId(sortButtonTestId)).toBeInTheDocument();
+    // expect(screen.getByTestId(sortButtonTestId)).toBeInTheDocument();
 
     expect(screen.getByTestId(buttonRemoveFiltersTestId)).toBeInTheDocument();
 

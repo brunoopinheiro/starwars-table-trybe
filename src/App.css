@@ -1,9 +1,14 @@
+:root {
+
+  --yellow-bright: #fae60a;
+}
+
 .app {
   background-color: black;
   background-image: url('swbackground.png');
   background-position: center;
   background-size: cover;
-  height: 140vh;
+  height: 200vh;
   width: 100vw;
 }
 
@@ -24,4 +29,126 @@
   padding: 10px;
   position: absolute;
   top: 691px;
+  width: 95%;
+}
+
+.table-container {
+  display: flex;
+  flex-flow: column;
+}
+
+.loading {
+  color: var(--yellow-bright);
+  text-align: center;
+}
+
+.filters-buttons {
+  display: flex;
+  flex-flow: column;
+}
+
+.filters-buttons button {
+  background: none;
+  border: 1px solid var(--yellow-bright);
+  border-radius: 5px;
+  color: var(--yellow-bright);
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 700;
+  height: 85px;
+  text-transform: uppercase;
+  width: 91px;
+}
+
+.filters-buttons input {
+  background: none;
+  border: 1px solid white;
+  border-radius: 5px;
+  color: white;
+  font-weight: 700;
+}
+
+.filters-buttons select {
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid white;
+  color: white;
+  font-weight: 700;
+  height: 42px;
+}
+
+.filters-buttons option {
+  background-color: transparent;
+  color: white;
+  font-weight: 700;
+}
+
+.filters-buttons select:active {
+  background-color: transparent;
+}
+
+.filters-buttons label {
+  font-weight: 700;
+}
+
+.main-filter {
+  font-size: 21px;
+  height: 42px;
+  margin: 25px auto;
+  width: 671px;
+}
+
+.number-input {
+  height: 42px;
+  width: 90px;
+}
+
+.numeric-filters {
+  align-items: center;
+  display: inline-flex;
+  justify-content: space-around;
+  padding: 20px 0;
+  width: 100%;
+}
+
+.numeric-filters span {
+  font-weight: 700;
+}
+
+.sort-filter {
+  align-items: flex-start;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+  width: 150px;
+}
+
+.sort-filter label {
+  cursor: pointer;
+  padding: 5px;
+}
+
+.sort-filter input {
+  appearance: none;
+  background: none;
+  border: 1px solid var(--yellow-bright);
+  border-radius: 50%;
+  color: var(--yellow-bright);
+  height: 1.15em;
+  margin: 0;
+  margin-right: 10px;
+  width: 1.15em;
+}
+
+.sort-filter input:before {
+  border-radius: 50%;
+  box-shadow: inset 1em 1em var(--yellow-bright);
+  color: var(--yellow-bright);
+  height: 0.65em;
+  width: 0.65em;
+}
+
+.sort-filter input:checked {
+  background-color: var(--yellow-bright);
+  transform: scale(1);
 }
