@@ -187,6 +187,9 @@ export default function Table() {
         }
       </div>
       <table>
+        <caption>
+          <h1>Star Wars Planets Table</h1>
+        </caption>
         <thead>
           <tr>
             <th>Name</th>
