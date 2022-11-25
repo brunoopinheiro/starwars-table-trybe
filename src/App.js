@@ -1,17 +1,18 @@
 import React from 'react';
 import Table from './components/Table';
+import swlogo from './swlogo.png';
 import './App.css';
 
 function App() {
   return (
-    <>
+    <div className="app">
       <header>
-        <h1>Projeto Star Wars - Trybe</h1>
+        <img src={ swlogo } alt="star wars logo" className="project-logo" />
       </header>
-      <section>
+      <section className="app-section">
         <Table />
       </section>
-    </>
+    </div>
   );
 }
 
