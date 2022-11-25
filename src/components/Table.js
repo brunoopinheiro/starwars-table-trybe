@@ -1,16 +1,9 @@
+/* eslint-disable react/jsx-max-depth */
 import { useContext, useState } from 'react';
 import PlanetsContext from '../context/PlanetsContext';
 import useFields from '../hooks/useFields';
 import numericFilter from '../utils/numericFilter';
 import usePlanetList from '../hooks/usePlanetList';
-
-// This is a sample of the objects that need to be passed to the numFilter state.
-// const sampleNumFilter = {
-//   compFilter: compFilter.value,
-//   columnFilter: columnFilter.value,
-//   valueFilter: valueFilter.value,
-//   id: numFilters.length,
-// };
 
 const columnFiltersArray = [
   'population',
@@ -77,55 +70,61 @@ export default function Table() {
 
   return (
     <div className="table-container">
-      { loading && <p>Loading data from a galaxy far far away...</p> }
+      {
+        loading
+        && <h3 className="loading">Loading data from a galaxy far far away...</h3>
+      }
       <div className="filters-buttons">
         <input
           data-testid="name-filter"
           type="text"
           placeholder="Planet Name"
+          className="main-filter"
           value={ nameFilter.value }
           onChange={ nameFilter.handleChange }
         />
-        <select
-          data-testid="column-filter"
-          name="column-filter"
-          value={ columnFilter.value }
-          onChange={ columnFilter.handleChange }
-          onClick={ columnFilter.handleChange }
-        >
-          {
-            columnFilters.map((cf) => (
-              <option key={ cf }>{cf}</option>
-            ))
-          }
-        </select>
-        <select
-          data-testid="comparison-filter"
-          name="comparison-filter"
-          value={ compFilter.value }
-          onChange={ compFilter.handleChange }
-        >
-          <option>maior que</option>
-          <option>menor que</option>
-          <option>igual a</option>
-        </select>
-        <input
-          data-testid="value-filter"
-          type="number"
-          value={ valueFilter.value }
-          onChange={ valueFilter.handleChange }
-        />
-        <button
-          type="button"
-          data-testid="button-filter"
-          onClick={ () => createNumFilter() }
-        >
-          Filter
-        </button>
-        <fieldset>
-          <legend>Sort Results</legend>
+        <div className="numeric-filters">
+          <select
+            data-testid="column-filter"
+            name="column-filter"
+            value={ columnFilter.value }
+            onChange={ columnFilter.handleChange }
+            onClick={ columnFilter.handleChange }
+          >
+            {
+              columnFilters.map((cf) => (
+                <option key={ cf }>{cf}</option>
+              ))
+            }
+          </select>
+          <select
+            data-testid="comparison-filter"
+            name="comparison-filter"
+            value={ compFilter.value }
+            onChange={ compFilter.handleChange }
+          >
+            <option>maior que</option>
+            <option>menor que</option>
+            <option>igual a</option>
+          </select>
+          <input
+            data-testid="value-filter"
+            type="number"
+            className="number-input"
+            value={ valueFilter.value }
+            onChange={ valueFilter.handleChange }
+          />
+          <button
+            type="button"
+            data-testid="button-filter"
+            onClick={ () => createNumFilter() }
+          >
+            Filter
+          </button>
+          <span>Sort Results:</span>
           <select
             data-testid="column-sort"
+            id="column-sort"
             name="column"
             value={ order.column }
             onChange={ handleChange }
@@ -136,48 +135,45 @@ export default function Table() {
               ))
             }
           </select>
-          <label htmlFor="asc">
-            Ascending
-            <input
-              data-testid="column-sort-input-asc"
-              id="asc"
-              value="ASC"
-              type="radio"
-              name="sort"
-              checked={ order.sort === 'ASC' }
-              onChange={ handleChange }
-            />
-          </label>
-          <label htmlFor="desc">
-            Descending
-            <input
-              data-testid="column-sort-input-desc"
-              id="desc"
-              value="DESC"
-              type="radio"
-              name="sort"
-              onChange={ handleChange }
-            />
-          </label>
+          <div className="sort-filter">
+            <label htmlFor="asc">
+              <input
+                data-testid="column-sort-input-asc"
+                id="asc"
+                value="ASC"
+                type="radio"
+                name="sort"
+                checked={ order.sort === 'ASC' }
+                onChange={ handleChange }
+              />
+              Ascending
+            </label>
+            <label htmlFor="desc">
+              <input
+                data-testid="column-sort-input-desc"
+                id="desc"
+                value="DESC"
+                type="radio"
+                name="sort"
+                onChange={ handleChange }
+              />
+              Descending
+            </label>
+          </div>
           <button
             type="button"
-            data-testid="column-sort-button"
+            data-testid="button-remove-filters"
+            onClick={ () => resetFilters() }
           >
-            Sort
+            Remove All Filters
           </button>
-        </fieldset>
-        <button
-          type="button"
-          data-testid="button-remove-filters"
-          onClick={ () => resetFilters() }
-        >
-          Remove All Filters
-        </button>
+        </div>
+
       </div>
       <div className="active-filters">
         {
           numFilters.map((nf) => (
-            <span key={ nf.id } data-testid="filter">
+            <span key={ nf.id } data-testid="filter" className="filter">
               {`${nf.columnFilter} ${nf.compFilter} ${nf.valueFilter}`}
               <button
                 type="button"
@@ -191,6 +187,9 @@ export default function Table() {
         }
       </div>
       <table>
+        <caption>
+          <h1>Star Wars Planets Table</h1>
+        </caption>
         <thead>
           <tr>
             <th>Name</th>

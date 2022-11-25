@@ -1,41 +1,274 @@
-.App {
+:root {
+
+  --background-table-title: #2e3035;
+
+  --table-text-color: #aeaeae;
+
+  --yellow-bright: #fae60a;
+}
+
+.app {
+  background-color: black;
+  background-image: url('swbackground.png');
+  background-position: center;
+  background-size: cover;
+  height: 210vh;
+  width: 100vw;
+}
+
+.project-logo {
+  height: 950px;
+  position: absolute;
+  right: 30%;
+  top: -217px;
+  width: 950px;
+}
+
+.app-section {
+  background-color: rgba(0, 0, 0, 0.25);
+  border: 1px solid white;
+  border-radius: 20px;
+  color: white;
+  margin: 10px 30px;
+  padding: 10px;
+  position: absolute;
+  top: 691px;
+  width: 95%;
+}
+
+.table-container {
+  display: flex;
+  flex-flow: column;
+  overflow: scroll;
+}
+
+.table-container::-webkit-scrollbar-track {
+  background-color: rgb(51, 51, 51);
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+.table-container::-webkit-scrollbar {
+  background-color: whitesmoke;
+  border-radius: 20px;
+  width: 10px;
+}
+
+.table-container::-webkit-scrollbar-thumb {
+  background-color: black;
+  border: 2px solid #555;
+  border-radius: 5px;
+}
+
+.loading {
+  color: var(--yellow-bright);
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media ( prefers-reduced-motion : no-preference ) {
-
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  align-items: center;
-  background-color: #282c34;
-  color: white;
+.filters-buttons {
   display: flex;
-  flex-direction: column;
-  font-size: calc(10px + 2vmin);
+  flex-flow: column;
+}
+
+.filters-buttons button {
+  background: none;
+  border: 1px solid var(--yellow-bright);
+  border-radius: 5px;
+  color: var(--yellow-bright);
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 700;
+  height: 85px;
+  text-transform: uppercase;
+  width: 91px;
+}
+
+.filters-buttons input {
+  background: none;
+  border: 1px solid white;
+  border-radius: 5px;
+  color: white;
+  font-weight: 700;
+}
+
+.filters-buttons select {
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid white;
+  color: white;
+  font-weight: 700;
+  height: 42px;
+}
+
+.filters-buttons select option {
+  background: black;
+  color: white;
+  font-weight: 700;
+}
+
+.filters-buttons label {
+  font-weight: 700;
+}
+
+.main-filter {
+  font-size: 21px;
+  height: 42px;
+  margin: 25px auto;
+  width: 671px;
+}
+
+.number-input {
+  height: 42px;
+  width: 90px;
+}
+
+.numeric-filters {
+  align-items: center;
+  display: inline-flex;
+  justify-content: space-around;
+  padding: 20px 0;
+  width: 100%;
+}
+
+.numeric-filters span {
+  font-weight: 700;
+}
+
+.sort-filter {
+  align-items: flex-start;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+  width: 150px;
+}
+
+.sort-filter label {
+  cursor: pointer;
+  padding: 5px;
+}
+
+.sort-filter input {
+  appearance: none;
+  background: none;
+  border: 1px solid var(--yellow-bright);
+  border-radius: 50%;
+  color: var(--yellow-bright);
+  height: 1.15em;
+  margin: 0;
+  margin-right: 10px;
+  width: 1.15em;
+}
+
+.sort-filter input:before {
+  border-radius: 50%;
+  box-shadow: inset 1em 1em var(--yellow-bright);
+  color: var(--yellow-bright);
+  height: 0.65em;
+  width: 0.65em;
+}
+
+.sort-filter input:checked {
+  background-color: var(--yellow-bright);
+  transform: scale(1);
+}
+
+.active-filters {
+  align-items: center;
+  display: inline-flex;
+  height: 50px;
   justify-content: center;
-  min-height: 100vh;
+  width: 100%;
 }
 
-.App-link {
-  color: #61dafb;
+.active-filters .filter {
+  border-right: 1px solid var(--yellow-bright);
+  font-weight: 700;
+  margin-left: 10px;
+  padding: 5px;
 }
 
-@keyframes App-logo-spin {
+.active-filters .filter:last-of-type {
+  border-right: none;
+}
 
-  from {
-    transform: rotate(0deg);
-  }
+.active-filters .filter button {
+  background: none;
+  border: 1px solid var(--yellow-bright);
+  border-radius: 5px;
+  color: var(--yellow-bright);
+  cursor: pointer;
+  margin: 0 10px;
+}
 
-  to {
-    transform: rotate(360deg);
-  }
+table {
+  border-collapse: separate;
+  font-size: 14px;
+  table-layout: fixed;
+}
+
+table thead {
+  background-color: var(--background-table-title);
+  height: 70px;
+}
+
+thead th:nth-child( 1 ) {
+  width: 7%;
+}
+
+thead th:nth-child( 2 ) {
+  width: 7%;
+}
+
+thead th:nth-child( 3 ) {
+  width: 7%;
+}
+
+thead th:nth-child( 4 ) {
+  width: 6%;
+}
+
+thead th:nth-child( 5 ) {
+  width: 6%;
+}
+
+thead th:nth-child( 6 ) {
+  width: 7%;
+}
+
+thead th:nth-child( 7 ) {
+  width: 8%;
+}
+
+thead th:nth-child( 8 ) {
+  width: 8%;
+}
+
+thead th:nth-child( 9 ) {
+  width: 6%;
+}
+
+thead th:nth-child( 10 ) {
+  width: 18%;
+}
+
+thead th:nth-child( 11 ) {
+  width: 6%;
+}
+
+thead th:nth-child( 12 ) {
+  width: 6%;
+}
+
+thead th:nth-child( 13 ) {
+  width: 8%;
+}
+
+table tbody {
+  color: var(--table-text-color);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 18px;
+}
+
+tbody th ul {
+  list-style: none;
 }
