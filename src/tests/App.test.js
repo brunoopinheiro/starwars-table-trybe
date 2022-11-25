@@ -26,7 +26,8 @@ describe('Tests the display of components in the application', () => {
   it('should test if the correct components are displayed', () => {
     renderWithContext(<App />);
 
-    expect(screen.getByRole('heading')).toHaveTextContent('Projeto Star Wars - Trybe');
+    // Header was replaced to logo image.
+    // expect(screen.getByRole('heading')).toHaveTextContent('Projeto Star Wars - Trybe');
 
     expect(screen.getByTestId(nameFilterTestId)).toBeInTheDocument();
     expect(screen.getByTestId(columnFilterTestId)).toBeInTheDocument();
